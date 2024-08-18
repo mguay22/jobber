@@ -1,0 +1,26 @@
+{
+  "name": "jobber-auth",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/jobber-auth/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "jobber-auth:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "jobber-auth:build:development"
+        },
+        "production": {
+          "buildTarget": "jobber-auth:build:production"
+        }
+      }
+    }
+  }
+}

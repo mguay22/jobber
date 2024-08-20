@@ -1,0 +1,15 @@
+generator client {
+    provider = "prisma-client-js"
+    output = "../../../node_modules/@prisma-clients/jobber-auth"
+}
+
+datasource db {
+    provider = "postgresql"
+    url = env("AUTH_DATABASE_URL")
+}
+
+model User {
+    id Int @default(autoincrement()) @id
+    email String @unique
+    password String
+}

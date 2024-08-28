@@ -8,6 +8,9 @@
     "build": {
       "dependsOn": ["generate-types"]
     },
+    "test": {
+      "dependsOn": ["generate-types"]
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",

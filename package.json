@@ -8,6 +8,7 @@
   "private": true,
   "dependencies": {
     "@apollo/server": "^4.11.0",
+    "@golevelup/nestjs-discovery": "^4.0.1",
     "@nestjs/apollo": "^12.2.0",
     "@nestjs/common": "^10.0.2",
     "@nestjs/config": "^3.2.3",

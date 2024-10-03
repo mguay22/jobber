@@ -11,6 +11,11 @@ import { GraphQLModule } from '@nestjs/graphql';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      playground: {
+        settings: {
+          'request.credentials': 'include',
+        },
+      },
     }),
   ],
   controllers: [],

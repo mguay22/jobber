@@ -41,6 +41,7 @@
     "graphql": "^16.9.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "pulsar-client": "^1.12.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "ts-proto": "^2.2.0",

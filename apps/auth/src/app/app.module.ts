@@ -15,7 +15,7 @@ import { AuthModule } from './auth/auth.module';
       driver: ApolloDriver,
       playground: {
         settings: {
-          'request.credentials': 'include',
+          'request.credentials': '',
         },
       },
       context: ({ req, res }) => ({ req, res }),

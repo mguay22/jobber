@@ -1,0 +1,26 @@
+{
+  "name": "executor",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/executor/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "executor:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "executor:build:development"
+        },
+        "production": {
+          "buildTarget": "executor:build:production"
+        }
+      }
+    }
+  }
+}

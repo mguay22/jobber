@@ -1,4 +1,4 @@
-import { AbstractModel } from '@jobber/nestjs';
+import { AbstractModel } from '@jobber/graphql';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()

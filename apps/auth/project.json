@@ -6,7 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "dependsOn": ["generate-prisma", "generate-ts-proto"]
+      "dependsOn": ["generate-prisma", "^build"]
     },
     "test": {
       "dependsOn": ["generate-prisma"]
@@ -41,9 +41,6 @@
       "options": {
         "cwd": "{projectRoot}"
       }
-    },
-    "generate-ts-proto": {
-      "command": "nx generate-ts-proto"
     }
   }
 }

@@ -1,0 +1,11 @@
+{
+  "name": "@jobber/graphql",
+  "version": "0.0.0",
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "@nestjs/apollo": "^12.2.0",
+    "@nestjs/graphql": "^12.2.0",
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {}
+}

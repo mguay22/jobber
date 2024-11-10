@@ -4,18 +4,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
-    "start": "nx run-many -t serve -p auth jobs executor",
-    "generate-ts-proto": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./types ./proto/*.proto --ts_proto_opt=nestJs=true"
-  },
-  "nx": {
-    "targets": {
-      "generate-ts-proto": {
-        "inputs": [
-          "{workspaceRoot}/proto/*.proto"
-        ],
-        "cache": true
-      }
-    }
+    "start": "nx run-many -t serve -p auth jobs executor"
   },
   "workspaces": [
     "apps/*",
@@ -23,36 +12,26 @@
   ],
   "private": true,
   "dependencies": {
-    "@apollo/server": "^4.11.0",
-    "@golevelup/nestjs-discovery": "^4.0.1",
-    "@grpc/grpc-js": "^1.11.3",
-    "@grpc/proto-loader": "^0.7.13",
-    "@nestjs/apollo": "^12.2.0",
     "@nestjs/common": "^10.0.2",
     "@nestjs/config": "^3.2.3",
     "@nestjs/core": "^10.0.2",
-    "@nestjs/graphql": "^12.2.0",
-    "@nestjs/jwt": "^10.2.0",
     "@nestjs/microservices": "^10.4.4",
-    "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.2",
-    "@prisma/client": "^5.18.0",
     "axios": "^1.6.0",
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "cookie-parser": "^1.4.6",
-    "fibonacci": "^1.6.11",
-    "graphql": "^16.9.0",
-    "graphql-type-json": "^0.3.2",
-    "passport": "^0.7.0",
-    "passport-jwt": "^4.0.1",
-    "pulsar-client": "^1.12.0",
+    "module-alias": "^2.2.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "ts-proto": "^2.2.0",
     "tslib": "^2.3.0"
+  },
+  "_moduleAliases": {
+    "@jobber/grpc": "dist/libs/grpc/main",
+    "@jobber/graphql": "dist/libs/graphql/main",
+    "@jobber/pulsar": "dist/libs/pulsar/main",
+    "@jobber/nestjs": "dist/libs/nestjs/main",
+    "@jobber/prisma": "dist/libs/prisma/main"
   },
   "devDependencies": {
     "@nestjs/schematics": "^10.0.1",
@@ -69,11 +48,9 @@
     "@swc-node/register": "~1.9.1",
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
-    "@types/bcryptjs": "^2.4.6",
     "@types/cookie-parser": "^1.4.7",
     "@types/jest": "^29.5.12",
     "@types/node": "~18.16.9",
-    "@types/passport-jwt": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
     "eslint": "~8.57.0",
@@ -84,7 +61,6 @@
     "lint-staged": "^15.2.9",
     "nx": "19.6.0",
     "prettier": "^2.6.2",
-    "prisma": "^5.18.0",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "~5.5.2",

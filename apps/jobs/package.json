@@ -1,6 +1,9 @@
 {
   "name": "@jobber/jobs",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "@golevelup/nestjs-discovery": "^4.0.1",
+    "graphql-type-json": "^0.3.2"
+  },
   "devDependencies": {}
 }

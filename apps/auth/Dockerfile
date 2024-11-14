@@ -10,33 +10,35 @@ COPY jest.preset.js ./
 COPY .eslintrc.json ./
 COPY webpack.*.config.js ./
 
-COPY apps/jobs ./apps/jobs
+COPY apps/auth ./apps/auth
 COPY libs/graphql ./libs/graphql
 COPY libs/grpc ./libs/grpc
 COPY libs/nestjs ./libs/nestjs
-COPY libs/pulsar ./libs/pulsar
+COPY libs/prisma ./libs/prisma
 
 RUN npm install
 
 RUN apt-get update && apt-get install -y protobuf-compiler
 
-RUN npx nx build jobs
+RUN npx nx build auth
 
 FROM node:18-slim AS runner
 
 WORKDIR /app
 
 COPY --from=builder /workspace/package.json ./
-COPY --from=builder /workspace/apps/jobs/package.json ./apps/jobs/package.json
+COPY --from=builder /workspace/apps/auth/package.json ./apps/auth/package.json
 COPY --from=builder /workspace/libs/graphql/package.json ./libs/graphql/package.json
 COPY --from=builder /workspace/libs/grpc/package.json ./libs/grpc/package.json
-COPY --from=builder /workspace/libs/pulsar/package.json ./libs/pulsar/package.json
+COPY --from=builder /workspace/libs/prisma/package.json ./libs/prisma/package.json
 COPY --from=builder /workspace/package-lock.json ./
 
 ENV NODE_ENV=production
 
 RUN npm ci
 
+COPY --from=builder /workspace/node_modules/@prisma-clients/auth/ ./node_modules/@prisma-clients/auth/
+
 COPY --from=builder /workspace/dist ./dist
 
-CMD ["node", "dist/apps/jobs/main"]
+CMD ["node", "dist/apps/auth/main"]

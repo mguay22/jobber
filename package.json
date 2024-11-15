@@ -21,6 +21,8 @@
     "class-validator": "^0.14.1",
     "cookie-parser": "^1.4.6",
     "module-alias": "^2.2.3",
+    "nestjs-pino": "^4.1.0",
+    "pino-http": "^10.3.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0"
@@ -59,6 +61,7 @@
     "jest-environment-node": "^29.7.0",
     "lint-staged": "^15.2.9",
     "nx": "19.6.0",
+    "pino-pretty": "^13.0.0",
     "prettier": "^2.6.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",

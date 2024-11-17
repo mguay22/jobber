@@ -39,7 +39,6 @@ jobs:
       # - run: npx nx-cloud record -- echo Hello World
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
       - run: npx nx affected -t lint test build
-      - run: NX_CLOUD_ACCESS_TOKEN=${{ secrets.NX_CLOUD_ACCESS_TOKEN }} npx nx-cloud complete-ci-run
 
       # Step 2: Configure AWS credentials
       - name: Configure AWS credentials
@@ -97,3 +96,5 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-docker-${{ github.sha }}
+
+      - run: NX_CLOUD_ACCESS_TOKEN=${{ secrets.NX_CLOUD_ACCESS_TOKEN }} npx nx-cloud complete-ci-run

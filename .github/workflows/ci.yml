@@ -85,10 +85,8 @@ jobs:
               --tag 168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/$NAME:latest \
               --push \
               -f $DOCKERFILE \
-              . &
+              .
           done
-
-          wait
 
       # Step 7: Save Docker layer cache to GitHub
       - name: Save Docker layer cache

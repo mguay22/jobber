@@ -57,15 +57,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Step 5: Restore Docker layer cache from GitHub
-      - name: Restore Docker layer cache
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-docker-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-docker-
-
       - name: Build and push all images to ECR
         run: |
           IMAGES=(
@@ -87,12 +78,5 @@ jobs:
               -f $DOCKERFILE \
               .
           done
-
-      # Step 7: Save Docker layer cache to GitHub
-      - name: Save Docker layer cache
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-docker-${{ github.sha }}
 
       - run: NX_CLOUD_ACCESS_TOKEN=${{ secrets.NX_CLOUD_ACCESS_TOKEN }} npx nx-cloud complete-ci-run

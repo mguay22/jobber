@@ -60,8 +60,6 @@ jobs:
             DOCKERFILE=$(echo $image | cut -d' ' -f2)
 
             docker buildx build \
-              --progress plain \
-              --platform linux/amd64,linux/arm64 \
               --cache-from=type=gha \
               --cache-to=type=gha,mode=max \
               --tag 168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/$NAME:latest \

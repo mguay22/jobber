@@ -31,7 +31,7 @@ jobs:
       - run: npm ci --legacy-peer-deps
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx affected -t lint test build
+      - run: npx nx affected -t lint test build --base main
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3

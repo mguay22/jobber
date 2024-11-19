@@ -59,11 +59,9 @@ jobs:
             NAME=$(echo $image | cut -d' ' -f1)
             DOCKERFILE=$(echo $image | cut -d' ' -f2)
 
-            CACHE_PATH="/tmp/.buildx-cache-$NAME"
-
             docker buildx build \
-              --cache-from=type=local,src=$CACHE_PATH \
-              --cache-to=type=local,dest=$CACHE_PATH,mode=max \
+              --cache-from=type=registry,ref=168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/cache:latest \
+              --cache-to=type=registry,ref=168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/cache:latest,mode=max \
               --tag 168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/$NAME:latest \
               --push \
               -f $DOCKERFILE \

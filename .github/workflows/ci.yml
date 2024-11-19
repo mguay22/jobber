@@ -61,7 +61,7 @@ jobs:
 
             docker buildx build \
               --cache-from=type=registry,ref=168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/cache:latest \
-              --cache-to=type=registry,ref=168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/cache:latest,mode=max \
+              --cache-to=type=registry,image-manifest=true,oci-mediatypes=true,ref=168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/cache:latest,mode=max \
               --tag 168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/$NAME:latest \
               --push \
               -f $DOCKERFILE \

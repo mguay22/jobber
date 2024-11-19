@@ -67,19 +67,15 @@ jobs:
             NAME=$(echo $image | cut -d' ' -f1)
             DOCKERFILE=$(echo $image | cut -d' ' -f2)
 
+            CACHE_PATH="/tmp/.buildx-cache-$NAME"
+
             docker buildx build \
-              --cache-from=type=local,src=/tmp/.buildx-cache \
-              --cache-to=type=local,dest=/tmp/.buildx-cache,mode=max \
+              --cache-from=type=local,src=$CACHE_PATH \
+              --cache-to=type=local,dest=$CACHE_PATH,mode=max \
               --tag 168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/$NAME:latest \
               --push \
               -f $DOCKERFILE \
               .
           done
-
-      - name: Save Docker cache
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-docker-${{ github.ref_name }}
 
       - run: NX_CLOUD_ACCESS_TOKEN=${{ secrets.NX_CLOUD_ACCESS_TOKEN }} npx nx-cloud complete-ci-run

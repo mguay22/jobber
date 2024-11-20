@@ -35,7 +35,7 @@ export class JobsService implements OnModuleInit {
     }
     if (!(job.discoveredClass.instance instanceof AbstractJob)) {
       throw new InternalServerErrorException(
-        'Job is not an instance of AbstractJob'
+        'Job is not an instance of AbstractJob.'
       );
     }
     await job.discoveredClass.instance.execute(data, job.meta.name);

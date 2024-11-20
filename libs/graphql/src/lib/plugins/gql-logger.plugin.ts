@@ -4,8 +4,8 @@ import {
   GraphQLRequestContext,
   GraphQLRequestListener,
 } from '@apollo/server';
-import { Logger } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
+import { Logger } from '@nestjs/common';
 
 export class GqlLoggingPlugin implements ApolloServerPlugin {
   private readonly logger = new Logger(GqlLoggingPlugin.name);

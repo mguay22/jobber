@@ -1,19 +1,21 @@
 import {
-  Injectable,
-  NestInterceptor,
-  ExecutionContext,
   CallHandler,
+  ExecutionContext,
+  Injectable,
   Logger,
+  NestInterceptor,
 } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class GrpcLoggingInterceptor implements NestInterceptor {
   private readonly logger = new Logger(GrpcLoggingInterceptor.name);
 
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(
+    context: ExecutionContext,
+    next: CallHandler<any>
+  ): Observable<any> | Promise<Observable<any>> {
     const handler = context.getHandler().name;
     const args = context.getArgs()[0];
     const startTime = Date.now();

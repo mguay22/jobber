@@ -59,14 +59,17 @@ jobs:
             NAME=$(echo $image | cut -d' ' -f1)
             DOCKERFILE=$(echo $image | cut -d' ' -f2)
 
-            docker buildx build \
-              --progress=plain \
-              --cache-from=type=registry,ref=168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/cache:latest \
-              --cache-to=type=registry,image-manifest=true,oci-mediatypes=true,ref=168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/cache:latest,mode=max \
-              --tag 168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/$NAME:latest \
-              --push \
-              -f $DOCKERFILE \
-              .
+            {
+              docker build \
+                --tag 168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/$NAME:latest \
+                -f $DOCKERFILE \
+                . &&
+              docker push 168617124956.dkr.ecr.us-east-1.amazonaws.com/jobber/$NAME:latest
+            } &
           done
+
+          wait
+
+          echo "All images built and pushed successfully."
 
       - run: NX_CLOUD_ACCESS_TOKEN=${{ secrets.NX_CLOUD_ACCESS_TOKEN }} npx nx-cloud complete-ci-run

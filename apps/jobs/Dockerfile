@@ -3,6 +3,14 @@ FROM node:18-slim AS builder
 WORKDIR /workspace
 
 COPY package*.json ./
+COPY apps/jobs/package.json ./apps/jobs/package.json
+COPY libs/graphql/package.json ./libs/graphql/package.json
+COPY libs/grpc/package.json ./libs/grpc/package.json
+COPY libs/pulsar/package.json ./libs/pulsar/package.json
+
+RUN --mount=type=cache,target=/root/.npm \
+    npm install
+
 COPY nx.json ./
 COPY tsconfig*.json ./
 COPY jest.config.ts ./
@@ -15,8 +23,6 @@ COPY libs/graphql ./libs/graphql
 COPY libs/grpc ./libs/grpc
 COPY libs/nestjs ./libs/nestjs
 COPY libs/pulsar ./libs/pulsar
-
-RUN npm install
 
 RUN apt-get update && apt-get install -y protobuf-compiler
 

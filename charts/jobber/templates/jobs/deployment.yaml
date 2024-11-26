@@ -1,0 +1,24 @@
+{{- if .Values.jobs.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobs
+  labels:
+    app: jobs
+spec:
+  replicas: {{ .Values.jobs.replicas }}
+  selector:
+    matchLabels:
+      app: jobs
+  template:
+    metadata:
+      labels:
+        app: jobs
+    spec:
+      containers:
+        - name: jobs
+          image: {{ .Values.jobs.image }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.jobs.port }}
+{{- end }}

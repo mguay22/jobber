@@ -21,4 +21,8 @@ spec:
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
           ports:
             - containerPort: {{ .Values.jobs.port }}
+          env:
+            {{- include "common.env" . | nindent 12 }}
+            - name: PORT
+              value: "{{ .Values.jobs.port }}"
 {{- end }}

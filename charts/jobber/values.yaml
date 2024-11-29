@@ -1,5 +1,43 @@
 global:
   imagePullPolicy: Always
+  pulsarServiceUrl: pulsar://{{ .Release.Name }}-pulsar-broker.pulsar.svc.cluster.local:6650
+  postgresConnectionString: postgresql://postgres:postgres@{{ .Relase.Name }}-postgresql.postgresql.svc.cluster.local:5432/jobber
+
+pulsar:
+  namespace: pulsar
+  namespaceCreate: true
+  zookeeper:
+    replicaCount: 1
+    podMonitor:
+      enabled: false
+  broker:
+    replicaCount: 1
+    podMonitor:
+      enabled: false
+  bookkeeper:
+    replicaCount: 1
+    podMonitor:
+      enabled: false
+  autorecovery:
+    podMonitor:
+      enabled: false
+  proxy:
+    replicaCount: 1
+    podMonitor:
+      enabled: false
+  kube-prometheus-stack:
+    enabled: false
+    prometheusOperator:
+      enabled: false
+    grafana:
+      enabled: false
+    alertmanager:
+      enabled: false
+    prometheus:
+      enabled: false
+
+postgresql:
+  namespaceOverride: postgresql
 
 jobs:
   enabled: true

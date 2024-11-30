@@ -22,5 +22,7 @@ spec:
           ports:
             - containerPort: {{ .Values.executor.port }}
           env:
+            - name: PORT
+              value: "{{ .Values.executor.port }}"
             {{- include "common.env" . | nindent 12 }}
 {{- end }}

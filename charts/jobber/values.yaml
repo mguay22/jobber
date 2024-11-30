@@ -1,6 +1,6 @@
 global:
   imagePullPolicy: Always
-  pulsarServiceUrl: pulsar://{{ .Release.Name }}-pulsar-broker.pulsar.svc.cluster.local:6650
+  pulsarServiceUrl: pulsar://jobber-pulsar-broker.pulsar.svc.cluster.local:6650
 
 pulsar:
   namespace: pulsar
@@ -39,6 +39,10 @@ pulsar:
 
 postgresql:
   namespaceOverride: postgresql
+  auth:
+    username: postgres
+    password: postgres
+    database: jobber
 
 jobs:
   enabled: true
@@ -49,7 +53,7 @@ jobs:
 executor:
   enabled: true
   image: '905418201315.dkr.ecr.us-east-1.amazonaws.com/jobber/executor:latest'
-  port: 4000
+  port: 3002
   replicas: 1
 
 auth:

@@ -1,0 +1,16 @@
+{{- if .Values.auth.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-http
+  labels:
+    app: auth
+spec:
+  type: ClusterIP
+  selector:
+    app: auth
+  ports:
+    - protocol: TCP
+      port: {{ .Values.auth.port.http }}
+      targetPort: {{ .Values.auth.port.http }}
+{{- end }}

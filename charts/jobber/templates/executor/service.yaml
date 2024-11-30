@@ -1,0 +1,16 @@
+{{- if .Values.executor.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: executor
+  labels:
+    app: executor
+spec:
+  type: ClusterIP
+  selector:
+    app: executor
+  ports:
+    - protocol: TCP
+      port: {{ .Values.executor.port }}
+      targetPort: {{ .Values.executor.port }}
+{{- end }}

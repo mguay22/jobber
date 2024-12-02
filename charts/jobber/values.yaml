@@ -1,7 +1,5 @@
 global:
   imagePullPolicy: Always
-  pulsarServiceUrl: pulsar://{{ .Release.Name }}-pulsar-broker.pulsar.svc.cluster.local:6650
-  postgresConnectionString: postgresql://postgres:postgres@{{ .Relase.Name }}-postgresql.postgresql.svc.cluster.local:5432/jobber
 
 pulsar:
   namespace: pulsar
@@ -38,6 +36,10 @@ pulsar:
 
 postgresql:
   namespaceOverride: postgresql
+  auth:
+    username: postgres
+    password: postgres
+    database: jobber
 
 jobs:
   enabled: true

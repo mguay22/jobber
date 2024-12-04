@@ -1,12 +1,6 @@
 # Builder Stage
 FROM node:18-slim AS builder
 
-# Install OpenSSL and other dependencies
-RUN apt-get update && apt-get install -y \
-    openssl \
-    protobuf-compiler && \
-    rm -rf /var/lib/apt/lists/*
-
 WORKDIR /workspace
 
 # Copy necessary files for building the app
@@ -33,17 +27,11 @@ RUN npx nx build auth
 # Runner Stage
 FROM node:18-slim AS runner
 
-# Install OpenSSL for runtime
-RUN apt-get update && apt-get install -y \
-    openssl && \
-    rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 # Copy necessary files
 COPY --from=builder /workspace/package.json ./
 COPY --from=builder /workspace/apps/auth/package.json ./apps/auth/package.json
-COPY --from=builder /workspace/apps/auth/prisma ./apps/auth/prisma
 COPY --from=builder /workspace/libs/graphql/package.json ./libs/graphql/package.json
 COPY --from=builder /workspace/libs/grpc/package.json ./libs/grpc/package.json
 COPY --from=builder /workspace/libs/prisma/package.json ./libs/prisma/package.json

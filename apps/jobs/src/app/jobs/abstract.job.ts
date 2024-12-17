@@ -17,15 +17,15 @@ export abstract class AbstractJob<T extends object> {
     }
     if (Array.isArray(data)) {
       for (const message of data) {
-        this.send(message);
+        await this.send(message);
       }
       return;
     }
-    this.send(data);
+    await this.send(data);
   }
 
-  private send(data: T) {
-    this.producer.send({ data: serialize(data) });
+  private async send(data: T) {
+    await this.producer.send({ data: serialize(data) });
   }
 
   private async validateData(data: T) {

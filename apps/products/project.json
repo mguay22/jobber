@@ -1,0 +1,38 @@
+{
+  "name": "products",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/products/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "products:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "products:build:development"
+        },
+        "production": {
+          "buildTarget": "products:build:production"
+        }
+      }
+    },
+    "generate-drizzle": {
+      "command": "drizzle-kit generate",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
+    },
+    "migrate-drizzle": {
+      "command": "drizzle-kit migrate",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

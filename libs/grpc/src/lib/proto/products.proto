@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package products;
+
+service ProductsService {
+    rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
+}
+
+message CreateProductRequest {
+    string name = 1;
+    string category = 2;
+    float price = 3;
+    int32 stock = 4;
+    float rating = 5;
+    string description = 6;
+}
+
+message CreateProductResponse {}

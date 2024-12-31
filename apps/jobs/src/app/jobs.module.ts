@@ -8,6 +8,7 @@ import { JobsResolver } from './jobs.resolver';
 import { join } from 'path';
 import { PulsarModule } from '@jobber/pulsar';
 import { ConfigService } from '@nestjs/config';
+import { LoadProductsJob } from './jobs/products/load-products.job';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { ConfigService } from '@nestjs/config';
       },
     ]),
   ],
-  providers: [FibonacciJob, JobsService, JobsResolver],
+  providers: [FibonacciJob, JobsService, JobsResolver, LoadProductsJob],
 })
 export class JobsModule {}

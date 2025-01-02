@@ -49,6 +49,7 @@ jobs:
             "jobs apps/jobs/Dockerfile"
             "executor apps/executor/Dockerfile"
             "auth apps/auth/Dockerfile"
+            "products apps/products/Dockerfile"
           )
 
           for image in "${IMAGES[@]}"; do

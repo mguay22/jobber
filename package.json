@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx run-many -t serve -p auth jobs executor"
+    "start": "NODE_OPTIONS='--max-old-space-size=8192' nx run-many -t serve -p auth jobs executor products --parallel 4",
+    "migrate": "nx migrate-prisma auth && nx migrate-drizzle products"
   },
   "workspaces": [
     "apps/*",

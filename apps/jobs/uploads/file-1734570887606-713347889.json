@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Mouse",
+    "category": "Electronics",
+    "price": 25.99,
+    "stock": 150,
+    "rating": 4.5,
+    "description": "A comfortable wireless mouse with ergonomic design and long battery life."
+  },
+  {
+    "id": 2,
+    "name": "Bluetooth Headphones",
+    "category": "Electronics",
+    "price": 49.99,
+    "stock": 85,
+    "rating": 4.7,
+    "description": "Noise-cancelling over-ear Bluetooth headphones with premium sound quality."
+  },
+  {
+    "id": 3,
+    "name": "Running Shoes",
+    "category": "Apparel",
+    "price": 89.99,
+    "stock": 120,
+    "rating": 4.3,
+    "description": "Lightweight and comfortable running shoes with excellent grip."
+  },
+  {
+    "id": 4,
+    "name": "Stainless Steel Water Bottle",
+    "category": "Home & Kitchen",
+    "price": 19.99,
+    "stock": 200,
+    "rating": 4.8,
+    "description": "Keeps beverages hot or cold for hours, perfect for outdoor activities."
+  },
+  {
+    "id": 5,
+    "name": "Smart Watch",
+    "category": "Electronics",
+    "price": 199.99,
+    "stock": 60,
+    "rating": 4.6,
+    "description": "Track your fitness, receive notifications, and more with this sleek smartwatch."
+  },
+  {
+    "id": 6,
+    "name": "Organic Coffee Beans",
+    "category": "Grocery",
+    "price": 15.99,
+    "stock": 300,
+    "rating": 4.9,
+    "description": "Premium organic coffee beans for the perfect cup of coffee every time."
+  },
+  {
+    "id": 7,
+    "name": "Adjustable Office Chair",
+    "category": "Furniture",
+    "price": 129.99,
+    "stock": 45,
+    "rating": 4.2,
+    "description": "Ergonomic office chair with adjustable height and lumbar support."
+  },
+  {
+    "id": 8,
+    "name": "Yoga Mat",
+    "category": "Sports & Outdoors",
+    "price": 29.99,
+    "stock": 100,
+    "rating": 4.7,
+    "description": "Non-slip yoga mat with extra cushioning for comfort during workouts."
+  },
+  {
+    "id": 9,
+    "name": "LED Desk Lamp",
+    "category": "Home & Kitchen",
+    "price": 34.99,
+    "stock": 75,
+    "rating": 4.4,
+    "description": "Energy-efficient LED desk lamp with adjustable brightness levels."
+  },
+  {
+    "id": 10,
+    "name": "Portable Charger",
+    "category": "Electronics",
+    "price": 22.99,
+    "stock": 180,
+    "rating": 4.6,
+    "description": "Compact and powerful portable charger for your devices on the go."
+  }
+]

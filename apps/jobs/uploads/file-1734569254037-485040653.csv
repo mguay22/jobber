@@ -1,0 +1,21 @@
+ProductID,ProductName,Category,Price,Stock
+P001,Wireless Mouse,Electronics,29.99,150
+P002,Gaming Keyboard,Electronics,79.99,120
+P003,USB-C Adapter,Accessories,19.99,300
+P004,Bluetooth Speaker,Audio,49.99,80
+P005,External Hard Drive,Storage,89.99,50
+P006,Smartphone Holder,Accessories,15.99,200
+P007,Fitness Tracker,Wearables,99.99,100
+P008,Noise Cancelling Headphones,Audio,199.99,40
+P009,4K Monitor,Monitors,299.99,30
+P010,Laptop Stand,Accessories,39.99,180
+P011,Portable Charger,Accessories,24.99,250
+P012,Webcam,Electronics,59.99,90
+P013,Desk Lamp,Lighting,22.99,70
+P014,Mechanical Pencil,Stationery,2.99,500
+P015,Notebook,Stationery,3.99,600
+P016,Ballpoint Pen,Stationery,1.99,1000
+P017,Tablet,Tablets,499.99,25
+P018,Smart Watch,Wearables,199.99,60
+P019,Ergonomic Chair,Furniture,149.99,40
+P020,Standing Desk,Furniture,249.99,35

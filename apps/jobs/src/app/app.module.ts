@@ -5,12 +5,16 @@ import { JobsModule } from './jobs.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { LoggerModule } from '@jobber/nestjs';
 import { GqlLoggingPlugin } from '@jobber/graphql';
+import { UploadsModule } from './uploads/uploads.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
     LoggerModule,
+    PrismaModule,
     ConfigModule.forRoot({ isGlobal: true }),
     JobsModule,
+    UploadsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,

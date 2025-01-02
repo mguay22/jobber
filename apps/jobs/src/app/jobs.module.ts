@@ -1,17 +1,21 @@
 import { Module } from '@nestjs/common';
 import { DiscoveryModule } from '@golevelup/nestjs-discovery';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { AUTH_PACKAGE_NAME } from '@jobber/grpc';
 import { FibonacciJob } from './jobs/fibonacci/fibonacci.job';
 import { JobsService } from './jobs.service';
 import { JobsResolver } from './jobs.resolver';
 import { join } from 'path';
+import { AUTH_PACKAGE_NAME } from '@jobber/grpc';
 import { PulsarModule } from '@jobber/pulsar';
 import { ConfigService } from '@nestjs/config';
+import { LoadProductsJob } from './jobs/products/load-products.job';
+import { PrismaModule } from './prisma/prisma.module';
+import { JobsController } from './jobs.controller';
 
 @Module({
   imports: [
     DiscoveryModule,
+    PrismaModule,
     PulsarModule,
     ClientsModule.registerAsync([
       {
@@ -28,6 +32,7 @@ import { ConfigService } from '@nestjs/config';
       },
     ]),
   ],
-  providers: [FibonacciJob, JobsService, JobsResolver],
+  controllers: [JobsController],
+  providers: [FibonacciJob, JobsService, JobsResolver, LoadProductsJob],
 })
 export class JobsModule {}

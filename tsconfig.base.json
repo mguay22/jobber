@@ -6,6 +6,7 @@
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2015",
@@ -15,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@jobber/drizzle": ["libs/drizzle/src/index.ts"],
       "@jobber/graphql": ["libs/graphql/src/index.ts"],
       "@jobber/grpc": ["libs/grpc/src/index.ts"],
       "@jobber/nestjs": ["libs/nestjs/src/index.ts"],

@@ -3,29 +3,43 @@ import { plainToInstance } from 'class-transformer';
 import { PulsarClient, serialize } from '@jobber/pulsar';
 import { validate } from 'class-validator';
 import { BadRequestException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { JobStatus } from '../models/job-status.enum';
 
 export abstract class AbstractJob<T extends object> {
   private producer: Producer;
   protected abstract messageClass: new () => T;
 
-  constructor(private readonly pulsarClient: PulsarClient) {}
+  constructor(
+    private readonly pulsarClient: PulsarClient,
+    private readonly prismaService: PrismaService
+  ) {}
 
   async execute(data: T, job: string) {
-    await this.validateData(data);
     if (!this.producer) {
       this.producer = await this.pulsarClient.createProducer(job);
     }
+    await this.prismaService.job.create({
+      data: {
+        name: job,
+        size: Array.isArray(data) ? data.length : 1,
+        completed: 0,
+        status: JobStatus.IN_PROGRESS,
+      },
+    });
     if (Array.isArray(data)) {
       for (const message of data) {
-        await this.send(message);
+        this.send(message);
       }
       return;
     }
-    await this.send(data);
+    this.send(data);
   }
 
-  private async send(data: T) {
-    await this.producer.send({ data: serialize(data) });
+  private send(data: T) {
+    this.validateData(data).then(() =>
+      this.producer.send({ data: serialize(data) })
+    );
   }
 
   private async validateData(data: T) {

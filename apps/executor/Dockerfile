@@ -17,6 +17,8 @@ COPY libs/pulsar ./libs/pulsar
 
 RUN npm install
 
+RUN apt-get update && apt-get install -y protobuf-compiler
+
 RUN npx nx build executor
 
 FROM node:18-slim AS runner

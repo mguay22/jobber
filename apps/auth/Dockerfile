@@ -23,6 +23,8 @@ COPY libs/prisma ./libs/prisma
 # Install dependencies
 RUN npm install
 
+RUN apt-get update && apt-get install -y protobuf-compiler
+
 # Build the app
 RUN npx nx build auth
 

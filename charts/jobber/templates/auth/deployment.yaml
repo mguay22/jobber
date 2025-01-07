@@ -25,6 +25,8 @@ spec:
               npx prisma migrate deploy --schema=apps/auth/prisma/schema.prisma
           env:
             {{- include "common.env" . | nindent 12 }}
+            - name: DATABASE_URL
+              value: postgresql://postgres:postgres@{{ .Release.Name }}-postgresql.postgresql.svc.cluster.local:5432/auth
       containers:
         - name: auth
           image: {{ .Values.auth.image }}

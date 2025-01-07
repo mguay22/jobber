@@ -42,4 +42,6 @@ spec:
               value: "{{ .Values.auth.jwt.expirationMs }}"
             - name: AUTH_GRPC_SERVICE_URL
               value: "0.0.0.0:{{ .Values.auth.port.grpc }}"
+            - name: DATABASE_URL
+              value: postgresql://postgres:postgres@{{ .Release.Name }}-postgresql.postgresql.svc.cluster.local:5432/auth
 {{- end }}

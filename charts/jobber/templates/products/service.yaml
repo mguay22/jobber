@@ -1,0 +1,16 @@
+{{- if .Values.products.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: products
+  labels:
+    app: products
+spec:
+  type: ClusterIP
+  selector:
+    app: products
+  ports:
+    - protocol: TCP
+      port: {{ .Values.products.port.grpc }}
+      targetPort: {{ .Values.products.port.grpc }}
+{{- end }}

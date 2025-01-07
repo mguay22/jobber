@@ -1,0 +1,44 @@
+{{- if .Values.products.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products
+  labels:
+    app: products
+spec:
+  replicas: {{ .Values.products.replicas }}
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      initContainers:
+        - name: drizzle-migrate
+          image: {{ .Values.products.image }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          command: ["sh", "-c"]
+          args:
+            - |
+              npx drizzle-kit migrate
+          env:
+            {{- include "common.env" . | nindent 12 }}
+            - name: DATABASE_URL
+              value: postgresql://postgres:postgres@{{ .Release.Name }}-postgresql.postgresql.svc.cluster.local:5432/products
+      containers:
+        - name: products
+          image: {{ .Values.products.image }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.products.port }}
+          env:
+            {{- include "common.env" . | nindent 12 }}
+            - name: PRODUCTS_GRPC_SERVICE_URL
+              value: "products-grpc:{{ .Values.products.port.grpc }}"
+            - name: PORT
+              value: "{{ .Values.products.port.http }}"
+            - name: DATABASE_URL
+              value: postgresql://postgres:postgres@{{ .Release.Name }}-postgresql.postgresql.svc.cluster.local:5432/products
+{{- end }}

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - products-helm
   pull_request:
 
 permissions:

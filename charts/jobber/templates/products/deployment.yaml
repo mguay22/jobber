@@ -22,7 +22,7 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
-              npx drizzle-kit migrate
+              npx drizzle-kit migrate --config apps/products/drizzle.config.ts
           env:
             {{- include "common.env" . | nindent 12 }}
             - name: DATABASE_URL
@@ -32,7 +32,7 @@ spec:
           image: {{ .Values.products.image }}
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.products.port }}
+            - containerPort: {{ .Values.products.port.http }}
           env:
             {{- include "common.env" . | nindent 12 }}
             - name: PRODUCTS_GRPC_SERVICE_URL

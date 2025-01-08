@@ -36,7 +36,7 @@ spec:
           env:
             {{- include "common.env" . | nindent 12 }}
             - name: PRODUCTS_GRPC_SERVICE_URL
-              value: "products-grpc:{{ .Values.products.port.grpc }}"
+              value: "0.0.0.0:{{ .Values.products.port.grpc }}"
             - name: PORT
               value: "{{ .Values.products.port.http }}"
             - name: DATABASE_URL

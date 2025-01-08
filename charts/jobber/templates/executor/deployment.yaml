@@ -26,5 +26,5 @@ spec:
             - name: PORT
               value: "{{ .Values.executor.port }}"
             - name: PRODUCTS_GRPC_SERVICE_URL
-              value: "products-grpc:{{ .Values.products.port.grpc }}"
+              value: "products:{{ .Values.products.port.grpc }}"
 {{- end }}

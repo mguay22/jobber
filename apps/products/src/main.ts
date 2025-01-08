@@ -1,5 +1,5 @@
+require('module-alias/register');
 import { NestFactory } from '@nestjs/core';
-
 import { AppModule } from './app/app.module';
 import { init } from '@jobber/nestjs';
 import { GrpcOptions, Transport } from '@nestjs/microservices';

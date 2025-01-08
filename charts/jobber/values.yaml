@@ -39,7 +39,12 @@ postgresql:
   auth:
     username: postgres
     password: postgres
-    database: auth
+  primary:
+    initdb:
+      scripts:
+        create-dbs.sql: |
+          CREATE DATABASE auth;
+          CREATE DATABASE products;
 
 jobs:
   enabled: true

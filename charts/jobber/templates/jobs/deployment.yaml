@@ -19,6 +19,9 @@ spec:
         - name: jobs
           image: {{ .Values.jobs.image }}
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          volumeMounts:
+            - name: uploads-volume
+              mountPath: /app/apps/jobs/uploads
           ports:
             - containerPort: {{ .Values.jobs.port }}
           env:
@@ -27,4 +30,8 @@ spec:
               value: "auth-grpc:{{ .Values.auth.port.grpc }}"
             - name: PORT
               value: "{{ .Values.jobs.port }}"
+      volumes:
+        - name: uploads-volume
+          persistentVolumeClaim:
+            claimName: uploads-pvc
 {{- end }}

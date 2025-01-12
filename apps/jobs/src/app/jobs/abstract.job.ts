@@ -15,13 +15,13 @@ export abstract class AbstractJob<T extends object> {
     private readonly prismaService: PrismaService
   ) {}
 
-  async execute(data: T, job: string) {
+  async execute(data: T, name: string) {
     if (!this.producer) {
-      this.producer = await this.pulsarClient.createProducer(job);
+      this.producer = await this.pulsarClient.createProducer(name);
     }
-    await this.prismaService.job.create({
+    const job = await this.prismaService.job.create({
       data: {
-        name: job,
+        name,
         size: Array.isArray(data) ? data.length : 1,
         completed: 0,
         status: JobStatus.IN_PROGRESS,
@@ -29,11 +29,11 @@ export abstract class AbstractJob<T extends object> {
     });
     if (Array.isArray(data)) {
       for (const message of data) {
-        this.send(message);
+        this.send({ ...message, jobId: job.id });
       }
       return;
     }
-    this.send(data);
+    this.send({ ...data, jobId: job.id });
   }
 
   private send(data: T) {

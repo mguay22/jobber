@@ -68,22 +68,30 @@ export class JobsService implements OnModuleInit {
   }
 
   async acknowledge(jobId: number) {
-    const job = await this.prismaService.job.update({
+    const job = await this.prismaService.job.findUnique({
       where: { id: jobId },
-      data: { completed: { increment: 1 } },
     });
 
     if (!job) {
       throw new BadRequestException(`Job with ID ${jobId} does not exist.`);
     }
 
-    if (job.completed === job.size) {
+    if (job.ended) {
+      return job;
+    }
+
+    const updatedJob = await this.prismaService.job.update({
+      where: { id: jobId },
+      data: { completed: { increment: 1 } },
+    });
+
+    if (updatedJob.completed === job.size) {
       await this.prismaService.job.update({
         where: { id: jobId },
-        data: { status: JobStatus.COMPLETED },
+        data: { status: JobStatus.COMPLETED, ended: new Date() },
       });
     }
 
-    return job;
+    return updatedJob;
   }
 }

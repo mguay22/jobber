@@ -15,4 +15,6 @@ model Job {
   size Int
   completed Int
   status String
+  started DateTime @default(now())
+  ended DateTime?
 }

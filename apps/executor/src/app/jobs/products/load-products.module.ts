@@ -5,10 +5,12 @@ import { ConfigService } from '@nestjs/config';
 import { PulsarModule } from '@jobber/pulsar';
 import { PRODUCTS_PACKAGE_NAME } from '@jobber/grpc';
 import { LoadProductsConsumer } from './load-products.consumer';
+import { JobClientsModule } from '../job-clients.module';
 
 @Module({
   imports: [
     PulsarModule,
+    JobClientsModule,
     ClientsModule.registerAsync([
       {
         name: PRODUCTS_PACKAGE_NAME,

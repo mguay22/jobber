@@ -36,7 +36,7 @@ export class UploadsController {
       },
     })
   )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  uploadFile(@UploadedFile() file: any) {
     return {
       message: 'File uploaded successfully',
       filename: file.filename,

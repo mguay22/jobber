@@ -25,4 +25,6 @@ spec:
             {{- include "common.env" . | nindent 12 }}
             - name: PORT
               value: "{{ .Values.executor.port }}"
+            - name: JOBS_GRPC_SERVICE_URL
+              value: "jobs-grpc:{{ .Values.jobs.port.grpc }}"
 {{- end }}

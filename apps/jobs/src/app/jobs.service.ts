@@ -31,7 +31,17 @@ export class JobsService implements OnModuleInit {
     );
   }
 
-  getJobs() {
+  async getJob(id: number) {
+    return this.prismaService.job.findUnique({
+      where: { id },
+    });
+  }
+
+  async getJobs() {
+    return this.prismaService.job.findMany();
+  }
+
+  getJobsMetadata() {
     return this.jobs.map((job) => job.meta);
   }
 

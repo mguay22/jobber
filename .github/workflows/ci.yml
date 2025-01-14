@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - job-status
   pull_request:
 
 permissions:

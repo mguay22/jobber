@@ -5,6 +5,12 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "build": {
+      "dependsOn": ["generate-prisma", "^build"]
+    },
+    "test": {
+      "dependsOn": ["generate-prisma"]
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
@@ -20,6 +26,20 @@
         "production": {
           "buildTarget": "jobs:build:production"
         }
+      }
+    },
+    "generate-prisma": {
+      "command": "prisma generate",
+      "options": {
+        "cwd": "{projectRoot}",
+        "input": ["prisma/schema.prisma"]
+      },
+      "cache": true
+    },
+    "migrate-prisma": {
+      "command": "prisma migrate dev",
+      "options": {
+        "cwd": "{projectRoot}"
       }
     }
   }

@@ -5,10 +5,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Packages } from '@jobber/grpc';
 import { ConfigService } from '@nestjs/config';
 import { join } from 'path';
+import { JobClientsModule } from '../job-clients.module';
 
 @Module({
   imports: [
     PulsarModule,
+    JobClientsModule,
     ClientsModule.registerAsync([
       {
         name: Packages.PRODUCTS,

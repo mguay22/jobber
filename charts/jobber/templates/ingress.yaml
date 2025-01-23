@@ -2,22 +2,24 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
     - host: graphql.local
       http:
         paths:
-          - path: /jobs
+          - path: /jobs/(.*)
             pathType: Prefix
             backend:
               service:
-                name: jobs
+                name: jobs-http
                 port:
-                  number: {{ .Values.jobs.port }}
-          - path: /auth
+                  number: {{ .Values.jobs.port.http }}
+          - path: /auth/(.*)
             pathType: Prefix
             backend:
               service:
-                name: auth
+                name: auth-http
                 port:
                   number: {{ .Values.auth.port.http }}

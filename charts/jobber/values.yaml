@@ -4,6 +4,8 @@ global:
 pulsar:
   namespace: pulsar
   namespaceCreate: true
+  components:
+    proxy: false
   zookeeper:
     replicaCount: 1
     podMonitor:
@@ -20,7 +22,6 @@ pulsar:
     podMonitor:
       enabled: false
   proxy:
-    replicaCount: 1
     podMonitor:
       enabled: false
   kube-prometheus-stack:
@@ -39,7 +40,13 @@ postgresql:
   auth:
     username: postgres
     password: postgres
-    database: jobber
+  primary:
+    initdb:
+      scripts:
+        create-dbs.sql: |
+          CREATE DATABASE auth;
+          CREATE DATABASE products;
+          CREATE DATABASE jobs;
 
 jobs:
   enabled: true
@@ -65,3 +72,11 @@ auth:
   jwt:
     secret: 31FDUHHUdaXYQeN2jiofyPTnIGSjGbFP
     expirationMs: "28800000"
+
+products:
+  enabled: true
+  replicas: 1
+  image: '905418201315.dkr.ecr.us-east-1.amazonaws.com/jobber/products:latest'
+  port:
+    http: 3003
+    grpc: 5001

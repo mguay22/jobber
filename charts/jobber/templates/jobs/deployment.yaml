@@ -15,6 +15,18 @@ spec:
       labels:
         app: jobs
     spec:
+      initContainers:
+        - name: prisma-migrate
+          image: {{ .Values.jobs.image }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          command: ["sh", "-c"]
+          args:
+            - |
+              npx prisma migrate deploy --schema=apps/jobs/prisma/schema.prisma
+          env:
+            {{- include "common.env" . | nindent 12 }}
+            - name: DATABASE_URL
+              value: postgresql://postgres:postgres@{{ .Release.Name }}-postgresql.postgresql.svc.cluster.local:5432/jobs
       containers:
         - name: jobs
           image: {{ .Values.jobs.image }}
@@ -23,13 +35,18 @@ spec:
             - name: uploads-volume
               mountPath: /app/apps/jobs/uploads
           ports:
-            - containerPort: {{ .Values.jobs.port }}
+            - containerPort: {{ .Values.jobs.port.http }}
+            - containerPort: {{ .Values.jobs.port.grpc }}
           env:
             {{- include "common.env" . | nindent 12 }}
             - name: AUTH_GRPC_SERVICE_URL
               value: "auth-grpc:{{ .Values.auth.port.grpc }}"
             - name: PORT
-              value: "{{ .Values.jobs.port }}"
+              value: "{{ .Values.jobs.port.http }}"
+            - name: JOBS_GRPC_SERVICE_URL
+              value: "0.0.0.0:{{ .Values.jobs.port.grpc }}"
+            - name: DATABASE_URL
+              value: postgresql://postgres:postgres@{{ .Release.Name }}-postgresql.postgresql.svc.cluster.local:5432/jobs
       volumes:
         - name: uploads-volume
           persistentVolumeClaim:

@@ -15,6 +15,7 @@ import { GqlLoggingPlugin } from '@jobber/graphql';
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
+      useGlobalPrefix: true,
       driver: ApolloDriver,
       plugins: [new GqlLoggingPlugin()],
       playground: {

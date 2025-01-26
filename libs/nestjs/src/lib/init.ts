@@ -3,10 +3,9 @@ import { Logger } from 'nestjs-pino';
 import * as cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
 
-export async function init(app: INestApplication) {
-  const globalPrefix = 'api';
+export async function init(app: INestApplication, globalPrefix?: string) {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  app.setGlobalPrefix(globalPrefix);
+  app.setGlobalPrefix(globalPrefix || 'api');
   app.useLogger(app.get(Logger));
   app.use(cookieParser());
   const port = app.get(ConfigService).getOrThrow('PORT');

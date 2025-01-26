@@ -6,11 +6,14 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/group.name: my-ingress-group
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:905418201315:certificate/823799ce-2e91-41bf-bfaf-75449e5c0da6
+    alb.ingress.kubernetes.io/ssl-redirect: "443"  # Redirect HTTP to HTTPS
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: jobber-backend.com
+      http:
         paths:
           - path: /jobs
             pathType: Prefix

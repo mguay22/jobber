@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+spec:
+  rules:
+    - host: jobber.local
+      http:
+        paths:
+          - path: /jobs
+            pathType: Prefix
+            backend:
+              service:
+                name: jobs-http
+                port:
+                  number: {{ .Values.jobs.port.http }}
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-http
+                port:
+                  number: {{ .Values.auth.port.http }}

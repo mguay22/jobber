@@ -34,6 +34,7 @@ export abstract class AbstractJob<T extends object> {
       return;
     }
     this.send({ ...data, jobId: job.id });
+    return job;
   }
 
   private send(data: T) {

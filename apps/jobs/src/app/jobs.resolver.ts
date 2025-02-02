@@ -19,12 +19,10 @@ export class JobsResolver {
   @Mutation(() => Job)
   @UseGuards(GqlAuthGuard)
   async executeJob(@Args('executeJobInput') executeJobInput: ExecuteJobInput) {
-    const finalJob = await this.jobsService.executeJob(
+    return this.jobsService.executeJob(
       executeJobInput.name,
       executeJobInput.data
     );
-    console.log(finalJob);
-    return finalJob;
   }
 
   @Query(() => [Job], { name: 'jobs' })

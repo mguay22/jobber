@@ -27,12 +27,11 @@ export abstract class AbstractJob<T extends object> {
         status: JobStatus.IN_PROGRESS,
       },
     });
-    console.log('Execute jobs', job);
     if (Array.isArray(data)) {
       for (const message of data) {
         this.send({ ...message, jobId: job.id });
       }
-      return;
+      return job;
     }
     this.send({ ...data, jobId: job.id });
     return job;

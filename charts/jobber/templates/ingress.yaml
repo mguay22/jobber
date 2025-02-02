@@ -2,10 +2,21 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
+  {{- if .Values.ingress.alb }}
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{ "HTTP": 80 }]'
+  {{- end }}
 spec:
+  {{- if .Values.ingress.alb }}
+  ingressClassName: alb
+  {{- end }}
   rules:
-    - host: jobber.local
-      http:
+    - http:
+      {{- if not .Values.ingress.alb }}
+      host: jobber.local
+      {{- end }}
         paths:
           - path: /jobs
             pathType: Prefix

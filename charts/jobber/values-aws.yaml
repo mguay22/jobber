@@ -1,0 +1,28 @@
+ingress:
+  alb: true
+
+persistence:
+  ebs: true
+
+pulsar:
+  global:
+    storageClass: "ebs-sc"
+  
+  zookeeper:
+    persistence:
+      storageClass: "ebs-sc"
+    volumes:
+      data:
+        storageClassName: "ebs-sc"
+
+  bookkeeper:
+    volumes:
+      journal:
+        storageClassName: "ebs-sc"
+      ledgers:
+        storageClassName: "ebs-sc"
+
+postgresql:
+  primary:
+    persistence:
+      storageClass: "ebs-sc"

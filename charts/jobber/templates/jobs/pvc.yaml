@@ -4,7 +4,14 @@ metadata:
   name: uploads-pvc
 spec:
   accessModes:
+    {{- if .Values.persistence.ebs }}
+    - ReadWriteOnce
+    {{- else }}
     - ReadWriteMany
+    {{- end }}
   resources:
     requests:
       storage: 5Gi
+  {{- if .Values.persistence.ebs }}
+  storageClassName: ebs-sc
+  {{- end}}

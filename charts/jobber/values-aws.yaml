@@ -4,6 +4,10 @@ ingress:
 persistence:
   ebs: true
 
+auth:
+  jwt:
+    secure: true
+
 pulsar:
   global:
     storageClass: "ebs-sc"
@@ -24,5 +28,8 @@ pulsar:
 
 postgresql:
   primary:
+    resources:
+      limits:
+        cpu: 1
     persistence:
       storageClass: "ebs-sc"

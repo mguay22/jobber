@@ -11,6 +11,7 @@ module.exports = {
       outputFileName: 'index.ts',
       main: './src/index.ts',
       tsConfig: './tsconfig.lib.json',
+      sourceMap: true,
       optimization: false,
       outputHashing: 'none',
     }),

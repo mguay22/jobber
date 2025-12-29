@@ -1,0 +1,104 @@
+services:
+  postgres:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: jobber
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pulsar:
+    image: apachepulsar/pulsar
+    command: /pulsar/bin/pulsar standalone
+    ports:
+      - 6650:6650
+      - 8080:8080
+    restart: always
+    healthcheck:
+      test:
+        ['CMD', 'curl', '-f', 'http://localhost:8080/admin/v2/brokers/health']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  auth:
+    build:
+      context: .
+      dockerfile: apps/auth/Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgresql://postgres:example@postgres:5432/auth
+      AUTH_GRPC_SERVICE_URL: 0.0.0.0:5000
+      JWT_SECRET: secret
+      JWT_EXPIRATION_MS: 360000
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  jobs:
+    build:
+      context: .
+      dockerfile: apps/jobs/Dockerfile
+    ports:
+      - 3001:3001
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgresql://postgres:example@postgres:5432/jobs
+      JOBS_GRPC_SERVICE_URL: 0.0.0.0:5001
+      AUTH_GRPC_SERVICE_URL: auth:5000
+      PULSAR_SERVICE_URL: pulsar://pulsar:6650
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      pulsar:
+        condition: service_healthy
+      auth:
+        condition: service_started
+
+  executor:
+    build:
+      context: .
+      dockerfile: apps/executor/Dockerfile
+    environment:
+      JOBS_GRPC_SERVICE_URL: jobs:5001
+      PRODUCTS_GRPC_SERVICE_URL: products:5002
+      PULSAR_SERVICE_URL: pulsar://pulsar:6650
+      PORT: 3003
+      NODE_ENV: production
+    depends_on:
+      pulsar:
+        condition: service_healthy
+      jobs:
+        condition: service_started
+      products:
+        condition: service_started
+
+  products:
+    build:
+      context: .
+      dockerfile: apps/products/Dockerfile
+    ports:
+      - 3002:3002
+    environment:
+      PORT: 3002
+      DATABASE_URL: postgresql://postgres:example@postgres:5432/products
+      PRODUCTS_GRPC_SERVICE_URL: 0.0.0.0:5002
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

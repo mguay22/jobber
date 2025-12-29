@@ -1,4 +1,5 @@
-FROM node:18-slim AS builder
+# Builder Stage
+FROM node:20-slim AS builder
 
 WORKDIR /workspace
 
@@ -21,7 +22,8 @@ RUN apt-get update && apt-get install -y protobuf-compiler
 
 RUN npx nx build executor
 
-FROM node:18-slim AS runner
+# Runner Stage
+FROM node:20-slim AS runner
 
 WORKDIR /app
 

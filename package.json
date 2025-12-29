@@ -4,7 +4,10 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_OPTIONS='--max-old-space-size=8192' nx run-many -t serve -p auth jobs executor products --parallel 4 --output-style=stream",
-    "stop": "lsof -ti :3000 -ti :3001 -ti :3002 -ti :3003 | xargs kill -9 2>/dev/null || echo 'No servers running'"
+    "stop": "lsof -ti :3000 -ti :3001 -ti :3002 -ti :3003 | xargs kill -9 2>/dev/null || echo 'No servers running'",
+    "docker:infra": "docker-compose up -d",
+    "docker:apps": "docker-compose -f docker-compose.apps.yaml up --build",
+    "docker:apps:down": "docker-compose -f docker-compose.apps.yaml down"
   },
   "workspaces": [
     "apps/*",

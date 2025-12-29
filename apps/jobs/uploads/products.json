@@ -1,0 +1,394 @@
+[
+  {
+    "name": "Wireless Bluetooth Headphones",
+    "category": "Electronics",
+    "price": 79.99,
+    "stock": 150,
+    "rating": 4.5,
+    "description": "Premium over-ear headphones with active noise cancellation and 30-hour battery life."
+  },
+  {
+    "name": "Organic Green Tea",
+    "category": "Food & Beverage",
+    "price": 12.99,
+    "stock": 500,
+    "rating": 4.8,
+    "description": "Loose leaf green tea sourced from sustainable farms in Japan."
+  },
+  {
+    "name": "Running Shoes",
+    "category": "Sports",
+    "price": 129.99,
+    "stock": 75,
+    "rating": 4.2,
+    "description": "Lightweight running shoes with responsive cushioning and breathable mesh upper."
+  },
+  {
+    "name": "Stainless Steel Water Bottle",
+    "category": "Home & Kitchen",
+    "price": 24.99,
+    "stock": 300,
+    "rating": 4.6,
+    "description": "Double-walled insulated bottle that keeps drinks cold for 24 hours or hot for 12 hours."
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "category": "Electronics",
+    "price": 149.99,
+    "stock": 60,
+    "rating": 4.7,
+    "description": "RGB backlit mechanical keyboard with Cherry MX switches and programmable macros."
+  },
+  {
+    "name": "Yoga Mat",
+    "category": "Sports",
+    "price": 34.99,
+    "stock": 200,
+    "rating": 4.4,
+    "description": "Non-slip exercise mat with extra cushioning for joints and alignment guides."
+  },
+  {
+    "name": "Smart Watch",
+    "category": "Electronics",
+    "price": 299.99,
+    "stock": 85,
+    "rating": 4.3,
+    "description": "Fitness tracker with heart rate monitor, GPS, and 7-day battery life."
+  },
+  {
+    "name": "French Press Coffee Maker",
+    "category": "Home & Kitchen",
+    "price": 29.99,
+    "stock": 180,
+    "rating": 4.6,
+    "description": "Borosilicate glass French press with stainless steel plunger for rich coffee."
+  },
+  {
+    "name": "Wireless Mouse",
+    "category": "Electronics",
+    "price": 49.99,
+    "stock": 220,
+    "rating": 4.5,
+    "description": "Ergonomic wireless mouse with adjustable DPI and silent click buttons."
+  },
+  {
+    "name": "Protein Powder",
+    "category": "Food & Beverage",
+    "price": 44.99,
+    "stock": 350,
+    "rating": 4.1,
+    "description": "Whey protein isolate with 25g protein per serving and natural vanilla flavor."
+  },
+  {
+    "name": "LED Desk Lamp",
+    "category": "Home & Kitchen",
+    "price": 39.99,
+    "stock": 140,
+    "rating": 4.7,
+    "description": "Adjustable LED lamp with multiple brightness levels and USB charging port."
+  },
+  {
+    "name": "Hiking Backpack",
+    "category": "Sports",
+    "price": 89.99,
+    "stock": 95,
+    "rating": 4.4,
+    "description": "40L waterproof backpack with hydration bladder compartment and rain cover."
+  },
+  {
+    "name": "Portable Charger",
+    "category": "Electronics",
+    "price": 35.99,
+    "stock": 400,
+    "rating": 4.6,
+    "description": "20000mAh power bank with fast charging and dual USB-C ports."
+  },
+  {
+    "name": "Cast Iron Skillet",
+    "category": "Home & Kitchen",
+    "price": 44.99,
+    "stock": 120,
+    "rating": 4.8,
+    "description": "Pre-seasoned 12-inch cast iron pan suitable for all cooktops including induction."
+  },
+  {
+    "name": "Resistance Bands Set",
+    "category": "Sports",
+    "price": 19.99,
+    "stock": 280,
+    "rating": 4.3,
+    "description": "Set of 5 latex bands with different resistance levels and carrying bag."
+  },
+  {
+    "name": "Noise Cancelling Earbuds",
+    "category": "Electronics",
+    "price": 199.99,
+    "stock": 110,
+    "rating": 4.5,
+    "description": "True wireless earbuds with ANC, transparency mode, and 8-hour playback."
+  },
+  {
+    "name": "Almond Butter",
+    "category": "Food & Beverage",
+    "price": 14.99,
+    "stock": 250,
+    "rating": 4.2,
+    "description": "Organic creamy almond butter with no added sugar or palm oil."
+  },
+  {
+    "name": "Electric Kettle",
+    "category": "Home & Kitchen",
+    "price": 54.99,
+    "stock": 165,
+    "rating": 4.7,
+    "description": "Temperature control kettle with keep-warm function and gooseneck spout."
+  },
+  {
+    "name": "Foam Roller",
+    "category": "Sports",
+    "price": 27.99,
+    "stock": 190,
+    "rating": 4.5,
+    "description": "High-density foam roller for muscle recovery and deep tissue massage."
+  },
+  {
+    "name": "USB-C Hub",
+    "category": "Electronics",
+    "price": 59.99,
+    "stock": 175,
+    "rating": 4.4,
+    "description": "7-in-1 hub with HDMI, SD card reader, USB-A, and 100W power delivery."
+  },
+  {
+    "name": "Bamboo Cutting Board",
+    "category": "Home & Kitchen",
+    "price": 22.99,
+    "stock": 210,
+    "rating": 4.6,
+    "description": "Large bamboo cutting board with juice groove and easy-grip handles."
+  },
+  {
+    "name": "Dumbbell Set",
+    "category": "Sports",
+    "price": 149.99,
+    "stock": 45,
+    "rating": 4.7,
+    "description": "Adjustable dumbbell set from 5-50 lbs with quick-change weight system."
+  },
+  {
+    "name": "Webcam HD",
+    "category": "Electronics",
+    "price": 79.99,
+    "stock": 130,
+    "rating": 4.3,
+    "description": "1080p webcam with autofocus, built-in microphone, and privacy cover."
+  },
+  {
+    "name": "Dark Chocolate Bar",
+    "category": "Food & Beverage",
+    "price": 5.99,
+    "stock": 600,
+    "rating": 4.9,
+    "description": "72% cacao single-origin dark chocolate from Ecuador, fair trade certified."
+  },
+  {
+    "name": "Air Purifier",
+    "category": "Home & Kitchen",
+    "price": 129.99,
+    "stock": 70,
+    "rating": 4.5,
+    "description": "HEPA air purifier for rooms up to 400 sq ft with quiet sleep mode."
+  },
+  {
+    "name": "Jump Rope",
+    "category": "Sports",
+    "price": 14.99,
+    "stock": 320,
+    "rating": 4.2,
+    "description": "Speed jump rope with ball bearings and adjustable cable length."
+  },
+  {
+    "name": "External SSD",
+    "category": "Electronics",
+    "price": 109.99,
+    "stock": 90,
+    "rating": 4.8,
+    "description": "1TB portable SSD with read speeds up to 1050MB/s and shock resistance."
+  },
+  {
+    "name": "Olive Oil",
+    "category": "Food & Beverage",
+    "price": 18.99,
+    "stock": 380,
+    "rating": 4.6,
+    "description": "Extra virgin olive oil cold-pressed from Italian olives, 500ml bottle."
+  },
+  {
+    "name": "Blender",
+    "category": "Home & Kitchen",
+    "price": 89.99,
+    "stock": 100,
+    "rating": 4.4,
+    "description": "High-speed blender with 1000W motor and BPA-free pitcher."
+  },
+  {
+    "name": "Tennis Racket",
+    "category": "Sports",
+    "price": 79.99,
+    "stock": 55,
+    "rating": 4.3,
+    "description": "Lightweight graphite racket with vibration dampening technology."
+  },
+  {
+    "name": "Monitor Stand",
+    "category": "Electronics",
+    "price": 44.99,
+    "stock": 145,
+    "rating": 4.5,
+    "description": "Adjustable monitor riser with storage drawer and phone holder."
+  },
+  {
+    "name": "Honey",
+    "category": "Food & Beverage",
+    "price": 11.99,
+    "stock": 420,
+    "rating": 4.7,
+    "description": "Raw unfiltered wildflower honey from local beekeepers, 16oz jar."
+  },
+  {
+    "name": "Instant Pot",
+    "category": "Home & Kitchen",
+    "price": 99.99,
+    "stock": 80,
+    "rating": 4.8,
+    "description": "7-in-1 electric pressure cooker with slow cook, rice, and yogurt functions."
+  },
+  {
+    "name": "Basketball",
+    "category": "Sports",
+    "price": 29.99,
+    "stock": 160,
+    "rating": 4.4,
+    "description": "Official size indoor/outdoor basketball with superior grip composite leather."
+  },
+  {
+    "name": "Laptop Stand",
+    "category": "Electronics",
+    "price": 39.99,
+    "stock": 185,
+    "rating": 4.6,
+    "description": "Aluminum laptop stand with adjustable height and ventilation slots."
+  },
+  {
+    "name": "Quinoa",
+    "category": "Food & Beverage",
+    "price": 8.99,
+    "stock": 290,
+    "rating": 4.5,
+    "description": "Organic tri-color quinoa, pre-washed and ready to cook, 2lb bag."
+  },
+  {
+    "name": "Knife Set",
+    "category": "Home & Kitchen",
+    "price": 79.99,
+    "stock": 65,
+    "rating": 4.6,
+    "description": "5-piece German steel knife set with ergonomic handles and block."
+  },
+  {
+    "name": "Swim Goggles",
+    "category": "Sports",
+    "price": 19.99,
+    "stock": 240,
+    "rating": 4.3,
+    "description": "Anti-fog swim goggles with UV protection and adjustable nose bridge."
+  },
+  {
+    "name": "Bluetooth Speaker",
+    "category": "Electronics",
+    "price": 69.99,
+    "stock": 155,
+    "rating": 4.5,
+    "description": "Waterproof portable speaker with 360-degree sound and 12-hour battery."
+  },
+  {
+    "name": "Maple Syrup",
+    "category": "Food & Beverage",
+    "price": 16.99,
+    "stock": 195,
+    "rating": 4.8,
+    "description": "Grade A pure maple syrup from Vermont, 12oz glass bottle."
+  },
+  {
+    "name": "Toaster",
+    "category": "Home & Kitchen",
+    "price": 49.99,
+    "stock": 125,
+    "rating": 4.4,
+    "description": "4-slice toaster with bagel function and removable crumb tray."
+  },
+  {
+    "name": "Cycling Helmet",
+    "category": "Sports",
+    "price": 64.99,
+    "stock": 85,
+    "rating": 4.6,
+    "description": "Lightweight bike helmet with MIPS protection and adjustable fit system."
+  },
+  {
+    "name": "Wireless Charger",
+    "category": "Electronics",
+    "price": 29.99,
+    "stock": 260,
+    "rating": 4.4,
+    "description": "15W fast wireless charging pad compatible with all Qi-enabled devices."
+  },
+  {
+    "name": "Coconut Oil",
+    "category": "Food & Beverage",
+    "price": 13.99,
+    "stock": 340,
+    "rating": 4.5,
+    "description": "Organic virgin coconut oil for cooking and skincare, 16oz jar."
+  },
+  {
+    "name": "Food Storage Containers",
+    "category": "Home & Kitchen",
+    "price": 34.99,
+    "stock": 150,
+    "rating": 4.7,
+    "description": "Set of 10 airtight glass containers with snap-lock lids, microwave safe."
+  },
+  {
+    "name": "Soccer Ball",
+    "category": "Sports",
+    "price": 24.99,
+    "stock": 175,
+    "rating": 4.5,
+    "description": "Size 5 match ball with textured surface for better control."
+  },
+  {
+    "name": "HDMI Cable",
+    "category": "Electronics",
+    "price": 14.99,
+    "stock": 450,
+    "rating": 4.6,
+    "description": "6ft HDMI 2.1 cable supporting 8K resolution and 120Hz refresh rate."
+  },
+  {
+    "name": "Chia Seeds",
+    "category": "Food & Beverage",
+    "price": 9.99,
+    "stock": 310,
+    "rating": 4.4,
+    "description": "Organic black chia seeds rich in omega-3 and fiber, 1lb bag."
+  },
+  {
+    "name": "Vacuum Sealer",
+    "category": "Home & Kitchen",
+    "price": 69.99,
+    "stock": 75,
+    "rating": 4.5,
+    "description": "Automatic vacuum sealer with built-in cutter and starter bag roll."
+  }
+]

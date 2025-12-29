@@ -1,81 +1,228 @@
 # Jobber
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A distributed job processing system built with a microservices architecture using NestJS, Apache Pulsar, and gRPC.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Overview
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/nest?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+Jobber enables asynchronous job execution and tracking across multiple services. It includes:
 
-## Finish your CI setup
+- **Authentication & user management**
+- **Job execution and progress tracking**
+- **Product catalog management**
+- **Asynchronous message processing via Apache Pulsar**
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/sqXD3CJhYr)
+## Architecture
 
-## Run tasks
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│    Auth     │     │    Jobs     │     │  Products   │
+│  (GraphQL)  │     │  (GraphQL)  │     │  (GraphQL)  │
+│  port 3000  │     │  port 3001  │     │  port 3002  │
+└──────┬──────┘     └──────┬──────┘     └──────┬──────┘
+       │                   │                   │
+       └─────────┬─────────┴─────────┬─────────┘
+                 │      gRPC         │
+                 ▼                   ▼
+          ┌─────────────┐     ┌─────────────┐
+          │   Pulsar    │────▶│  Executor   │
+          │   (Queue)   │     │  (Worker)   │
+          └─────────────┘     └─────────────┘
+                 │                   │
+                 ▼                   ▼
+          ┌─────────────────────────────────┐
+          │           PostgreSQL            │
+          └─────────────────────────────────┘
+```
 
-To run the dev server for your app, use:
+### Applications
 
-```sh
+| App | Description | Port |
+|-----|-------------|------|
+| `auth` | Authentication & user management | 3000 |
+| `jobs` | Job management & execution | 3001 |
+| `products` | Product catalog service | 3002 |
+| `executor` | Background job worker | - |
+
+### Shared Libraries
+
+| Library | Description |
+|---------|-------------|
+| `@jobber/grpc` | gRPC protocol definitions (proto files) |
+| `@jobber/graphql` | Shared GraphQL utilities |
+| `@jobber/nestjs` | Common NestJS setup utilities |
+| `@jobber/pulsar` | Apache Pulsar client & consumer abstractions |
+| `@jobber/prisma` | Shared Prisma database utilities |
+
+## Tech Stack
+
+- **Framework**: NestJS 10.x
+- **Monorepo**: Nx 19.6
+- **Language**: TypeScript 5.5
+- **Databases**: PostgreSQL with Prisma ORM (auth, jobs) and Drizzle ORM (products)
+- **Message Queue**: Apache Pulsar
+- **Inter-service Communication**: gRPC with Protocol Buffers
+- **API**: GraphQL (Apollo)
+
+## Prerequisites
+
+- Node.js 18+
+- Docker & Docker Compose
+- npm
+
+## Getting Started
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Start infrastructure
+
+```bash
+docker-compose up -d
+```
+
+This starts:
+- PostgreSQL on port 5432
+- Apache Pulsar on port 6650
+
+### 3. Run database migrations
+
+```bash
+# Auth & Jobs (Prisma)
+npx nx migrate-prisma auth
+npx nx migrate-prisma jobs
+
+# Products (Drizzle)
+npx nx migrate-drizzle products
+```
+
+### 4. Generate Prisma clients
+
+```bash
+npx nx generate-prisma auth
+npx nx generate-prisma jobs
+```
+
+### 5. Start all services
+
+```bash
+npm start
+```
+
+Or start individual services:
+
+```bash
 npx nx serve auth
+npx nx serve jobs
+npx nx serve executor
+npx nx serve products
 ```
 
-To create a production bundle:
+## Usage
 
-```sh
-npx nx build auth
+### GraphQL Endpoints
+
+- Auth: http://localhost:3000/graphql
+- Jobs: http://localhost:3001/graphql
+- Products: http://localhost:3002/graphql
+
+### Execute a Job
+
+```graphql
+mutation {
+  executeJob(executeJobInput: {
+    name: "LOAD_PRODUCTS",
+    data: { fileName: "products.json" }
+  }) {
+    id
+    status
+  }
+}
 ```
 
-To see all available targets to run for a project, run:
+### Query Job Status
 
-```sh
-npx nx show project auth
+```graphql
+query {
+  job(id: 1) {
+    id
+    name
+    status
+    size
+    completed
+  }
+}
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### Test Script
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/nest:app demo
+```bash
+# Test Fibonacci job execution
+node scripts/fibonacci.mjs http://localhost:3000/graphql http://localhost:3001/graphql 1000
 ```
 
-To generate a new library, use:
+## Development
 
-```sh
-npx nx g @nx/node:lib mylib
+### Build
+
+```bash
+npx nx build <app-name>
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+### Test
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+npx nx test <app-name>
+```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Lint
 
-## Install Nx Console
+```bash
+npx nx lint <app-name>
+```
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+### Generate Drizzle migrations (Products)
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+npx nx generate-drizzle products
+```
 
-## Useful links
+### Visualize project graph
 
-Learn more:
+```bash
+npx nx graph
+```
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/nest?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Project Structure
 
-And join the Nx community:
+```
+jobber/
+├── apps/
+│   ├── auth/           # Auth service (GraphQL, Prisma)
+│   ├── jobs/           # Jobs service (GraphQL, Prisma)
+│   ├── executor/       # Worker service (Pulsar consumer)
+│   └── products/       # Products service (GraphQL, Drizzle)
+├── libs/
+│   ├── grpc/           # Proto definitions & generated types
+│   ├── graphql/        # GraphQL utilities & plugins
+│   ├── nestjs/         # Common NestJS utilities
+│   ├── prisma/         # Prisma utilities
+│   └── pulsar/         # Pulsar client & messages
+├── docker-compose.yaml
+├── nx.json
+├── package.json
+└── tsconfig.base.json
+```
 
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Environment Variables
+
+Each service requires configuration via environment variables. Key variables:
+
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | PostgreSQL connection string |
+| `PULSAR_SERVICE_URL` | Pulsar broker URL |
+| `AUTH_GRPC_SERVICE_URL` | Auth service gRPC endpoint |
+| `JOBS_GRPC_SERVICE_URL` | Jobs service gRPC endpoint |

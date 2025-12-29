@@ -33,14 +33,13 @@ export abstract class AbstractJob<T extends object> {
       }
       return job;
     }
-    this.send({ ...data, jobId: job.id });
+    await this.send({ ...data, jobId: job.id });
     return job;
   }
 
-  private send(data: T) {
-    this.validateData(data).then(() =>
-      this.producer.send({ data: serialize(data) })
-    );
+  private async send(data: T) {
+    await this.validateData(data);
+    await this.producer.send({ data: serialize(data) });
   }
 
   private async validateData(data: T) {

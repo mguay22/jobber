@@ -2,7 +2,7 @@
   "name": "@jobber/executor",
   "version": "0.0.0",
   "dependencies": {
-    "fibonacci": "^1.6.11"
+    "fibonacci": "^1.6.12"
   },
   "devDependencies": {}
 }

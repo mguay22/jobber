@@ -2,7 +2,7 @@
   "name": "@jobber/prisma",
   "version": "0.0.0",
   "dependencies": {
-    "@prisma/client": "^5.18.0",
-    "prisma": "^5.18.0"
+    "@prisma/client": "^7.2.0",
+    "prisma": "^7.2.0"
   }
 }

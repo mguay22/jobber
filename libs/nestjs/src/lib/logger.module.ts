@@ -1,25 +1,29 @@
-import { Module } from '@nestjs/common';
+import { Module, RequestMethod } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { LoggerModule as PinoLoggerModule } from 'nestjs-pino';
+import { LoggerModule as PinoLoggerModule, Params } from 'nestjs-pino';
+import * as pino from 'pino';
 
 @Module({
   imports: [
     PinoLoggerModule.forRootAsync({
-      useFactory: (configService: ConfigService) => {
+      useFactory: (configService: ConfigService): Params => {
         const isProduction = configService.get('NODE_ENV') === 'production';
 
-        return {
-          pinoHttp: {
-            transport: isProduction
-              ? undefined
-              : {
-                  target: 'pino-pretty',
-                  options: {
-                    singleLine: true,
-                  },
+        const logger = pino.pino({
+          level: isProduction ? 'info' : 'debug',
+          transport: isProduction
+            ? undefined
+            : {
+                target: 'pino-pretty',
+                options: {
+                  singleLine: true,
                 },
-            level: isProduction ? 'info' : 'debug',
-          },
+              },
+        });
+
+        return {
+          pinoHttp: { logger },
+          forRoutes: [{ path: '*splat', method: RequestMethod.ALL }],
         };
       },
       inject: [ConfigService],

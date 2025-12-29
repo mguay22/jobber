@@ -2,10 +2,12 @@
   "name": "@jobber/jobs",
   "version": "0.0.0",
   "dependencies": {
-    "@golevelup/nestjs-discovery": "^4.0.1",
-    "graphql-type-json": "^0.3.2"
+    "@as-integrations/express5": "^1.1.2",
+    "@golevelup/nestjs-discovery": "^6.1.1",
+    "graphql-type-json": "^0.3.2",
+    "pino": "^10.1.0"
   },
   "devDependencies": {
-    "@types/multer": "^1.4.12"
+    "@types/multer": "^2.0.0"
   }
 }

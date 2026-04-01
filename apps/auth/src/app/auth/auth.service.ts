@@ -12,15 +12,15 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly configService: ConfigService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
   ) {}
 
   async login({ email, password }: LoginInput, response: Response) {
     const user = await this.verifyUser(email, password);
     const expires = new Date();
     expires.setMilliseconds(
-      expires.getTime() +
-        parseInt(this.configService.getOrThrow('JWT_EXPIRATION_MS'))
+      expires.getMilliseconds() +
+        parseInt(this.configService.getOrThrow('JWT_EXPIRATION_MS')),
     );
     const tokenPayload: TokenPayload = {
       userId: user.id,
